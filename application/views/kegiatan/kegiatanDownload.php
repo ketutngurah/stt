@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1 class="ml-2">PIKET</h1>
+    <h1 class="ml-2">KEGIATAN</h1>
     <div class="paging"><?php echo $pagination; ?></div>
     <div class="data"><?php echo $table; ?></div>
     <div class="paging"><?php echo $pagination; ?></div>

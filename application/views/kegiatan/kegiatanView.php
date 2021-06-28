@@ -3,11 +3,11 @@
 	<div class="table">
 		<table class="table table-borderless">
 			<tr>
-				<td width="30%">ID kegiatan</td>
+				<td width="30%">ID Kegiatan</td>
 				<td><?php echo $kegiatan->id_kegiatan; ?></td>
 			</tr>
 			<tr>
-				<td valign="top">Nama kegiatan</td>
+				<td valign="top">Nama Kegiatan</td>
 				<td><?php echo $kegiatan->nama_kegiatan; ?></td>
 			</tr>
 			<tr>
