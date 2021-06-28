@@ -223,4 +223,9 @@ class Piket extends CI_Controller
         $this->form_validation->set_rules('tgl_piket', 'Tanggal', 'required|trim');
         $this->form_validation->set_rules('ket_piket', 'Keterangan Piket', 'required|trim');
     }
+
+    function piketdownload()
+    {
+        $this->load->view('piket/piketDownload');
+    }
 }
