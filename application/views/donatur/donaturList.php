@@ -5,14 +5,18 @@
 	<div class="paging"><?php echo $pagination; ?></div>
 
 
-	<div class="ml-2 p-2">
-		<a href="<?= base_url('donatur/add'); ?>" class="btn btn-success">
-			<i class="fa fa-plus" aria-hidden="true"></i>
-			Tambah Donatur Baru
-		</a>
-	</div>
-	<!-- <div class="ml-3 p-2">
+	<div class="row">
+		<div class="col-lg">
+			<a href="<?= base_url('donatur/add'); ?>" class="btn btn-success">
+				<i class="fa fa-plus" aria-hidden="true"></i>
+				Tambah Donatur Baru
+			</a>
+		</div>
+		<div class="col-lg text-right">
+			<p>Total Donasi</p>
+			<h5>Rp. <?= $total_donasi; ?></h5>
 
-		<?php echo anchor('donatur/add/', 'Tambah Donatur Baru', array('class' => 'btn btn-success')); ?>
-	</div> -->
+		</div>
+	</div>
+
 </div>

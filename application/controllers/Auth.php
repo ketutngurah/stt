@@ -42,11 +42,11 @@ class Auth extends CI_Controller
                 if (password_verify($password, $user['password'])) {
                     $data = [
                         'email' => $user['email'],
-                        'jabatan' => $user['jabatan']
+                        'role_id' => $user['role_id']
                     ];
                     $this->session->set_userdata($data);
-                    if ($user['jabatan'] == 1) {
-                        redirect('user');
+                    if ($user['role_id'] == 1) {
+                        redirect('dashboard');
                     } else {
                         redirect('auth');
                     }
@@ -103,7 +103,7 @@ class Auth extends CI_Controller
                 'telp_ortu' => htmlspecialchars($this->input->post('telp_ortu')),
                 'email' => $email,
                 'password' => password_hash($this->input->post('password1'), PASSWORD_DEFAULT),
-                'jabatan' => 2,
+                'role_id' => 2,
                 'is_active' => 0,
                 'date_created' => time()
             ];

@@ -9,18 +9,29 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
 
-            <!-- jika userdata jabatan bernilai 1 maka tampilkan menu yg bisa diakses pengurus -->
-            <!-- cek apakah user data yang login itu pengurus atau anggota -->
             <?php
-            $jabatan = $this->session->userdata('jabatan'); //anggap $jabatan = 2
-            if ($jabatan == '1') {
-                echo "";
-            } else {
-                echo "";
-            }
+            $role_id = $this->session->userdata('role_id');
+            $queryMenu = "SELECT *
+            FROM `user_menu` JOIN `user_access_menu` 
+            ON `user_menu`.`id` = `user_access_menu`.`menu_id`
+            WHERE `user_access_menu`.`role_id` = $role_id
+            ORDER BY `user_access_menu`.`menu_id` ASC
+                ";
+            $menu = $this->db->query($queryMenu)->result_array();
             ?>
-            <!-- jika userdata jabatan bernilai 2 maka tampilkan menu yg bisa diakses anggota saja -->
-            <li>
+
+            <!-- LOOPING MENU -->
+            <?php foreach ($menu as $m) :    ?>
+                <li>
+                    <a href="<?= base_url($m['url']); ?>">
+                        <i class="<?= $m['icon']; ?>"></i>
+                        <p><?= $m['title']; ?></p>
+                    </a>
+                </li>
+
+            <?php endforeach;    ?>
+
+            <!-- <li>
                 <a href="<?= base_url('user'); ?>">
                     <i class="nc-icon nc-single-02"></i>
                     <p>Profil</p>
@@ -45,9 +56,15 @@
                 </a>
             </li>
             <li>
-                <a href="./notifications.html">
+                <a href="<?= base_url('iuran'); ?>">
                     <i class="nc-icon nc-bell-55"></i>
                     <p>Iuran</p>
+                </a>
+            </li>
+            <li>
+                <a href="<?= base_url('verifikasi'); ?>">
+                    <i class="nc-icon nc-bell-55"></i>
+                    <p>Verifikasi</p>
                 </a>
             </li>
             <li>
@@ -55,9 +72,9 @@
                     <i class="nc-icon nc-bell-55"></i>
                     <p>Donatur</p>
                 </a>
-            </li>
+            </li> -->
             <li>
-                <a href="./tables.html">
+                <a href="<?= base_url('auth/logout'); ?>">
                     <i class="nc-icon nc-tile-56"></i>
                     <p>Logout</p>
                 </a>

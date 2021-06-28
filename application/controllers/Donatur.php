@@ -13,6 +13,9 @@ class Donatur extends CI_Controller
 
     public function index($offset = 0, $order_column = 'id_donatur', $order_type = 'asc')
     {
+        // $data['total_donasi'] = $this->db->select_sum('jumlah_donasi')->get('tb_donatur')->row_array();
+        $query = $this->db->select('SUM(jumlah_donasi) as total_donasi')->from('tb_donatur')->get();
+        $data['total_donasi'] = $query->row()->total_donasi;
         $data['title'] = 'List Donatur';
         // $data['user'] = $this->db->get_where('tb_pengurus', ['nama_pengurus' => $this->session->userdata('nama_pengurus')])->row_array();
         $this->load->view('templates/new_header', $data);
