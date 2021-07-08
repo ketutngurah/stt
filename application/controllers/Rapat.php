@@ -157,8 +157,6 @@ class Rapat extends CI_Controller
         $this->load->view('templates/new_footer');
     }
 
-
-
     function update($id_rapat)
     {
         $data['title'] = 'Update Data Rapat';
@@ -274,7 +272,7 @@ class Rapat extends CI_Controller
                 $rapat->tgl_rapat,
                 $rapat->ket_rapat,
                 $rapat->file_rapat,
-                anchor('rapat/download/' . $rapat->id_rapat, 'download', array('class' => 'btn btn-primary'))
+                anchor('rapat/download/' . $rapat->id_rapat, 'download file', array('class' => 'btn btn-primary'))
             );
         }
         $data['table'] = $this->table->generate();

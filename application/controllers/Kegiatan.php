@@ -274,7 +274,7 @@ class kegiatan extends CI_Controller
                 $kegiatan->tgl_kegiatan,
                 $kegiatan->ket_kegiatan,
                 $kegiatan->file_kegiatan,
-                anchor('kegiatan/download/' . $kegiatan->id_kegiatan, 'download', array('class' => 'btn btn-primary'))
+                anchor('kegiatan/download/' . $kegiatan->id_kegiatan, 'download file', array('class' => 'btn btn-primary'))
             );
         }
         $data['table'] = $this->table->generate();

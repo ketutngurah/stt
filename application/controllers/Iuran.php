@@ -14,7 +14,6 @@ class Iuran extends CI_Controller
     public function index($offset = 0, $order_column = 'id_iuran', $order_type = 'asc')
     {
         $data['title'] = 'List Iuran';
-        // $data['user'] = $this->db->get_where('tb_pengurus', ['nama_pengurus' => $this->session->userdata('nama_pengurus')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -183,7 +182,7 @@ class Iuran extends CI_Controller
             // set user message
             $data['message'] = 'Update Success';
         }
-        $data['link_back'] = anchor('iuran/index/', 'Daftar Data iuran', array('class' => 'back'));
+        $data['link_back'] = anchor('iuran/index/', 'Daftar Data Iuran', array('class' => 'back'));
         // load view
         $this->load->view('iuran/iuranEdit', $data);
         $this->load->view('templates/new_footer');
@@ -205,7 +204,112 @@ class Iuran extends CI_Controller
         $this->form_validation->set_rules('ket_iuran', 'Keterangan Iuran', 'required|trim');
     }
 
-    function bayar_iuran()
+    function bayar_iuran($offset = 0, $order_column = 'id_iuran', $order_type = 'asc')
     {
+        $data['title'] = 'List Bayar Iuran';
+        $this->load->view('templates/new_header', $data);
+        $this->load->view('templates/new_sidebar');
+        $this->load->view('templates/new_topbar');
+
+        if (empty($offset)) $offset = 0;
+        if (empty($order_column)) $order_column = 'id_iuran';
+        if (empty($order_type)) $order_type = 'asc';
+        //TODO: check for valid column
+
+        // load data
+        $iurans = $this->iuran_model->get_paged_list(10, $offset, $order_column, $order_type)->result();
+
+        // generate pagination
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('iuran/bayar_iuran/');
+        $config['total_rows'] = $this->iuran_model->count_all();
+        $config['per_page'] = 10;
+        $config['uri_segment'] = 3;
+        $this->pagination->initialize($config);
+        $data['pagination'] = $this->pagination->create_links();
+
+        // generate table data
+        $tmpl = array('table_open'  => '<table class="table table-borderless">');
+
+        $this->table->set_template($tmpl);
+
+        $this->load->library('table');
+        $this->table->set_empty("&nbsp;");
+        $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
+        $this->table->set_heading(
+            'No',
+            anchor('iuran/index/' . $offset . '/nama_iuran/' . $new_order, 'Iuran'),
+            anchor('iuran/index/' . $offset . '/tgl_iuran/' . $new_order, 'Tanggal'),
+            anchor('iuran/index/' . $offset . '/ket_iuran/' . $new_order, 'Keterangan'),
+            'Actions'
+        );
+
+        $i = 0 + (int) $offset;
+        foreach ($iurans as $iuran) {
+            $this->table->add_row(
+                ++$i,
+                $iuran->nama_iuran,
+                $iuran->tgl_iuran,
+                $iuran->ket_iuran,
+                anchor('iuran/viewUser/' . $iuran->id_iuran, 'view', array('class' => 'btn btn-warning'))
+            );
+        }
+        $data['table'] = $this->table->generate();
+
+        // load view
+        $this->load->view('iuran/iuranList', $data);
+        $this->load->view('templates/new_footer');
+    }
+
+    function viewUser($id_iuran)
+    {
+        $data['title'] = 'Iuran';
+        $this->load->view('templates/new_header', $data);
+        $this->load->view('templates/new_sidebar');
+        $this->load->view('templates/new_topbar');
+
+        // get details
+        $data['iuran'] = $this->iuran_model->get_by_id($id_iuran)->row();
+        $data['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
+
+
+        // load view
+        $this->load->view('iuran/iuranUpload', $data);
+        $this->load->view('templates/new_footer');
+    }
+
+    function uploadfile()
+    {
+
+        $id_user = $this->input->post('id_user');
+        $id_iuran = $this->input->post('id_iuran');
+        $file_verifikasi = $_FILES['file_verifikasi']['name'];
+
+        if ($file_verifikasi) {
+            $config['allowed_types'] = 'pdf|docx|jpg|jpeg|png|gif';
+            $config['upload_path'] = './uploads/';
+            $config['max_size'] = '2048';
+
+            $this->load->library('upload', $config);
+            if ($this->upload->do_upload('file_verifikasi')) {
+                $upload = $this->upload->data('file_name');
+
+                $data = array(
+                    'id_user' => $id_user,
+                    'id_iuran' => $id_iuran,
+                    'file_verifikasi' => $upload,
+                );
+
+                $this->db->insert('tb_verifikasi', $data);
+                redirect('iuran/bayar_iuran');
+            } else {
+                // echo "image gagal di upload";
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
+                redirect('iuran/bayar_iuran');
+            }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-dsnger" role="alert">Failed upload</div>');
+            redirect('iuran/bayar_iuran');
+        }
     }
 }

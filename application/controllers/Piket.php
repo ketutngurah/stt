@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class piket extends CI_Controller
+class Piket extends CI_Controller
 {
     public function __construct()
     {
@@ -274,7 +274,7 @@ class piket extends CI_Controller
                 $piket->tgl_piket,
                 $piket->ket_piket,
                 $piket->file_piket,
-                anchor('piket/download/' . $piket->id_piket, 'download', array('class' => 'btn btn-primary'))
+                anchor('piket/download/' . $piket->id_piket, 'download file', array('class' => 'btn btn-primary'))
             );
         }
         $data['table'] = $this->table->generate();
