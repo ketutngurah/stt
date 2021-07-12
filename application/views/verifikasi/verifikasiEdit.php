@@ -2,45 +2,67 @@
     <h1 class="ml-3"><?php echo $title; ?></h1>
     <?php echo $message; ?>
     <?php echo validation_errors(); ?>
-    <?php echo form_open($action); ?>
-    <div class="container">
-        <form>
-            <div class="form-group">
-                <label for="id_iuran">ID Iuran</label>
-                <input type="text" name="id_iuran" id="id_iuran" disabled="disable" class="form-control" value="<?php echo (isset($iuran['id_iuran'])) ? $iuran['id_iuran'] : ''; ?>" />
-                <input type="hidden" name="id_iuran" value="<?php echo (isset($iuran['id_iuran'])) ? $iuran['id_iuran'] : ''; ?>" />
+    <form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
+
+        <div class="form-group">
+            <label for="id_verifikasi">ID Verifikasi</label>
+            <input type="text" name="id_verifikasi" id="id_verifikasi" class="form-control" value="<?php echo (isset($verifikasi['id_verifikasi'])) ? $verifikasi['id_verifikasi'] : ''; ?>" />
+            <input type="hidden" name="id_verifikasi" value="<?php echo (isset($verifikasi['id_verifikasi'])) ? $verifikasi['id_verifikasi'] : ''; ?>" />
+        </div>
+
+        <div class="form-group">
+            <label for="nama">Nama Anggota</label>
+            <input type="hidden" name="id_user" value="<?php echo (isset($verifikasi['id_user'])) ? $verifikasi['id_user'] : ''; ?>" />
+            <input type="text" name="nama" id="nama" class="form-control" value="<?php echo (isset($verifikasi['nama'])) ? $verifikasi['nama'] : ''; ?>" />
+            <?php echo form_error('nama'); ?>
+        </div>
+
+        <div class="form-group">
+            <label for="nama_iuran">Nama Iuran</label>
+            <input type="hidden" name="id_iuran" value="<?php echo (isset($verifikasi['id_iuran'])) ? $verifikasi['id_iuran'] : ''; ?>" />
+            <input type="text" name="nama_iuran" id="nama_iuran" class="form-control" value="<?php echo (isset($verifikasi['nama_iuran'])) ? $verifikasi['nama_iuran'] : ''; ?>" />
+            <?php echo form_error('nama_iuran'); ?>
+        </div>
+
+        <div class="form-group">
+            <label for="file_verifikasi">File</label>
+            <input type="text" name="file_verifikasi" id="file_verifikasi" class="form-control" value="<?php echo (set_value('file_verifikasi')) ? set_value('file_verifikasi') : $verifikasi['file_verifikasi']; ?>" />
+            <?php echo form_error('file_verifikasi'); ?>
+        </div>
+
+        <div class="d-block ml-2">
+            <label for="jk">Status</label>
+        </div>
+        <div class="form-group row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="custom-control custom-radio">
+                    <input id="belum lunas" name="status" type="radio" class="custom-control-input" checked="" value="belum lunas" value="0">
+                    <label class="custom-control-label" for="belum lunas">Belum Lunas</label>
+                </div>
             </div>
-
-            <div class="form-group">
-                <label for="nama_iuran">Nama Iuran</label>
-                <input type="text" name="nama_iuran" id="nama_iuran" class="form-control" value="<?php echo set_value('nama_iuran') ? set_value('nama_iuran') : $iuran['nama_iuran']; ?>" />
-                <?php echo form_error('nama_iuran'); ?>
+            <div class="col-sm-6">
+                <div class="custom-control custom-radio">
+                    <input id="lunas" name="status" type="radio" class="custom-control-input" value="1">
+                    <label class="custom-control-label" for="lunas">Lunas</label>
+                </div>
             </div>
+            <?=
+            form_error('status', '<small class="text-danger pl-2">', '</small>');
+            ?>
+        </div>
+        <div class="col-md-12">
+            <img class="img-thumbnail" src="<?= base_url() ?>uploads/<?= $verifikasi['file_verifikasi'] ?>" width="500px" />
+        </div>
 
-
-            <div class="form-group">
-                <label for="tgl_iuran">Tanggal</label>
-                <input type="date" name="tgl_iuran" id="tgl_iuran" class="form-control" value="<?php echo (set_value('tgl_iuran')) ? set_value('tgl_iuran') : $iuran['tgl_iuran']; ?>" />
-                <?php echo form_error('tgl_iuran'); ?>
-            </div>
-
-            <div class="form-group">
-
-                <label for="ket_iuran">Keterangan</label>
-                <input type="text" name="ket_iuran" id="ket_iuran" class="form-control" value="<?php echo (set_value('ket_iuran')) ? set_value('ket_iuran') : $iuran['ket_iuran']; ?>" />
-                <?php echo form_error('ket_iuran'); ?>
-            </div>
-
-            <div class="form-group">
-                <input type="submit" class="btn btn-info" value="Save" />
-            </div>
-        </form>
-    </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-info" value="Save" />
+        </div>
     </form>
-    <div class="ml-3 p-2">
-        <a href="<?= base_url('iuran'); ?>" class="btn btn-success">
-            <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-            Daftar Data iuran
-        </a>
-    </div>
+</div>
+<div class="ml-3 p-2">
+    <a href="<?= base_url('verifikasi'); ?>" class="btn btn-success">
+        <i class="fa fa-angle-double-left" aria-hidden="true"></i>
+        Daftar Data Verifikasi
+    </a>
+</div>
 </div>

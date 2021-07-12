@@ -28,7 +28,7 @@
 	<div class="ml-2 p-2">
 		<a href="<?= base_url('donatur'); ?>" class="btn btn-success">
 			<i class="fa fa-angle-double-left" aria-hidden="true"></i>
-			Daftar Data Donasi
+			Daftar Data Donatur
 		</a>
 	</div>
 

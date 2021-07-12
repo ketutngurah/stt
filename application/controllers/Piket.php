@@ -14,7 +14,6 @@ class Piket extends CI_Controller
     public function index($offset = 0, $order_column = 'id_piket', $order_type = 'asc')
     {
         $data['title'] = 'List Piket';
-        // $data['user'] = $this->db->get_where('tb_pengurus', ['nama_pengurus' => $this->session->userdata('nama_pengurus')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -82,7 +81,6 @@ class Piket extends CI_Controller
     function add()
     {
         $data['title'] = 'Tambah Piket';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -162,7 +160,6 @@ class Piket extends CI_Controller
     function update($id_piket)
     {
         $data['title'] = 'Update Data Piket';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -187,28 +184,46 @@ class Piket extends CI_Controller
             $config['upload_path'] = './uploads/';
             $config['file_name'] = $_FILES['file_piket']['name'];
 
+
             $this->load->library('upload', $config);
             if ($this->upload->do_upload('file_piket')) {
                 $this->upload->data('file_name');
+                // save data
+                $id_piket = $this->input->post('id_piket');
+                $piket = array(
+                    'id_piket' => $this->input->post('id_piket'),
+                    'nama_piket' => $this->input->post('nama_piket'),
+                    'tgl_piket' => $this->input->post('tgl_piket'),
+                    'ket_piket' => $this->input->post('ket_piket'),
+                    'file_piket' => $_FILES['file_piket']['name'],
+                );
+
+
+                $id_piket = $this->piket_model->update($id_piket, $piket);
+                $data['piket'] = (array)$this->piket_model->get_by_id($id_piket)->row();
+
+                $this->validation->id_piket = $id_piket;
+                redirect('piket');
+                // set user message
+                $data['message'] = 'Update Success';
+            } else {
+                $id_piket = $this->input->post('id_piket');
+                $piket = array(
+                    'id_piket' => $this->input->post('id_piket'),
+                    'nama_piket' => $this->input->post('nama_piket'),
+                    'tgl_piket' => $this->input->post('tgl_piket'),
+                    'ket_piket' => $this->input->post('ket_piket')
+                );
+
+
+                $id_piket = $this->piket_model->update($id_piket, $piket);
+                $data['piket'] = (array)$this->piket_model->get_by_id($id_piket)->row();
+
+                $this->validation->id_piket = $id_piket;
+                redirect('piket');
+                // set user message
+                $data['message'] = 'Update Success';
             }
-
-            // save data
-            $id_piket = $this->input->post('id_piket');
-            $piket = array(
-                'id_piket' => $this->input->post('id_piket'),
-                'nama_piket' => $this->input->post('nama_piket'),
-                'tgl_piket' => $this->input->post('tgl_piket'),
-                'ket_piket' => $this->input->post('ket_piket'),
-                'file_piket' => $_FILES['file_piket']['name'],
-            );
-
-            $id_piket = $this->piket_model->update($id_piket, $piket);
-            $data['piket'] = (array)$this->piket_model->get_by_id($id_piket)->row();
-
-            $this->validation->id_piket = $id_piket;
-            redirect('piket');
-            // set user message
-            $data['message'] = 'Update Success';
         }
         $data['link_back'] = anchor('piket/index/', 'Daftar Data piket', array('class' => 'back'));
         // load view
@@ -290,14 +305,6 @@ class Piket extends CI_Controller
         $this->load->view('templates/new_footer');
     }
 
-    // validation rules
-    function _set_rules()
-    {
-        $this->form_validation->set_rules('nama_piket', 'Nama Piket', 'required|trim');
-        $this->form_validation->set_rules('tgl_piket', 'Tanggal', 'required|trim');
-        $this->form_validation->set_rules('ket_piket', 'Keterangan Piket', 'required|trim');
-    }
-
     function download($id)
     {
         // SELECT file_piket FROM tb_piket WHERE id_piket = $id
@@ -322,5 +329,13 @@ class Piket extends CI_Controller
         $data = file_get_contents('./uploads/' . $file);
         force_download($name, $data);
         redirect('piket');
+    }
+
+    // validation rules
+    function _set_rules()
+    {
+        $this->form_validation->set_rules('nama_piket', 'Nama Piket', 'required|trim');
+        $this->form_validation->set_rules('tgl_piket', 'Tanggal', 'required|trim');
+        $this->form_validation->set_rules('ket_piket', 'Keterangan Piket', 'required|trim');
     }
 }

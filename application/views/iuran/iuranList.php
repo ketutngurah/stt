@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <h1 class="ml-2">DATA IURAN</h1>
+    <h1 class="ml-2">IURAN</h1>
     <?= $this->session->flashdata('message'); ?>
     <div class="paging"><?php echo $pagination; ?></div>
     <div class="data"><?php echo $table; ?></div>

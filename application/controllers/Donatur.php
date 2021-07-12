@@ -138,7 +138,7 @@ class Donatur extends CI_Controller
         $this->load->view('templates/new_topbar');
 
         // set common properties
-        $data['title'] = 'Detail Data donatur';
+        $data['title'] = 'Detail Data Donatur';
         $data['link_back'] = anchor('donatur/index/', 'Daftar donatur', array('class' => 'back'));
 
         // get details

@@ -190,25 +190,41 @@ class kegiatan extends CI_Controller
             $this->load->library('upload', $config);
             if ($this->upload->do_upload('file_kegiatan')) {
                 $this->upload->data('file_name');
+                // save data
+                $id_kegiatan = $this->input->post('id_kegiatan');
+                $kegiatan = array(
+                    'id_kegiatan' => $this->input->post('id_kegiatan'),
+                    'nama_kegiatan' => $this->input->post('nama_kegiatan'),
+                    'tgl_kegiatan' => $this->input->post('tgl_kegiatan'),
+                    'ket_kegiatan' => $this->input->post('ket_kegiatan'),
+                    'file_kegiatan' => $_FILES['file_kegiatan']['name'],
+                );
+
+                $id_kegiatan = $this->kegiatan_model->update($id_kegiatan, $kegiatan);
+                $data['kegiatan'] = (array)$this->kegiatan_model->get_by_id($id_kegiatan)->row();
+
+                $this->validation->id_kegiatan = $id_kegiatan;
+                redirect('kegiatan');
+                // set user message
+                $data['message'] = 'Update Success';
+            } else {
+                // save data
+                $id_kegiatan = $this->input->post('id_kegiatan');
+                $kegiatan = array(
+                    'id_kegiatan' => $this->input->post('id_kegiatan'),
+                    'nama_kegiatan' => $this->input->post('nama_kegiatan'),
+                    'tgl_kegiatan' => $this->input->post('tgl_kegiatan'),
+                    'ket_kegiatan' => $this->input->post('ket_kegiatan'),
+                );
+
+                $id_kegiatan = $this->kegiatan_model->update($id_kegiatan, $kegiatan);
+                $data['kegiatan'] = (array)$this->kegiatan_model->get_by_id($id_kegiatan)->row();
+
+                $this->validation->id_kegiatan = $id_kegiatan;
+                redirect('kegiatan');
+                // set user message
+                $data['message'] = 'Update Success';
             }
-
-            // save data
-            $id_kegiatan = $this->input->post('id_kegiatan');
-            $kegiatan = array(
-                'id_kegiatan' => $this->input->post('id_kegiatan'),
-                'nama_kegiatan' => $this->input->post('nama_kegiatan'),
-                'tgl_kegiatan' => $this->input->post('tgl_kegiatan'),
-                'ket_kegiatan' => $this->input->post('ket_kegiatan'),
-                'file_kegiatan' => $_FILES['file_kegiatan']['name'],
-            );
-
-            $id_kegiatan = $this->kegiatan_model->update($id_kegiatan, $kegiatan);
-            $data['kegiatan'] = (array)$this->kegiatan_model->get_by_id($id_kegiatan)->row();
-
-            $this->validation->id_kegiatan = $id_kegiatan;
-            redirect('kegiatan');
-            // set user message
-            $data['message'] = 'Update Success';
         }
         $data['link_back'] = anchor('kegiatan/index/', 'Daftar Data kegiatan', array('class' => 'back'));
         // load view
@@ -290,14 +306,6 @@ class kegiatan extends CI_Controller
         $this->load->view('templates/new_footer');
     }
 
-    // validation rules
-    function _set_rules()
-    {
-        $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required|trim');
-        $this->form_validation->set_rules('tgl_kegiatan', 'Tanggal', 'required|trim');
-        $this->form_validation->set_rules('ket_kegiatan', 'Keterangan Kegiatan', 'required|trim');
-    }
-
     function download($id)
     {
         // SELECT file_kegiatan FROM tb_kegiatan WHERE id_kegiatan = $id
@@ -322,5 +330,13 @@ class kegiatan extends CI_Controller
         $data = file_get_contents('./uploads/' . $file);
         force_download($name, $data);
         redirect('kegiatan');
+    }
+
+    // validation rules
+    function _set_rules()
+    {
+        $this->form_validation->set_rules('nama_kegiatan', 'Nama Kegiatan', 'required|trim');
+        $this->form_validation->set_rules('tgl_kegiatan', 'Tanggal', 'required|trim');
+        $this->form_validation->set_rules('ket_kegiatan', 'Keterangan Kegiatan', 'required|trim');
     }
 }

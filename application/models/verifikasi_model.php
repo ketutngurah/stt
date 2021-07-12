@@ -37,10 +37,10 @@ class verifikasi_model extends CI_Model
         return $this->db->insert_id();
     }
 
-    function update($id_verifikasi, $person)
+    function update($id_verifikasi, $verifikasi)
     {
         $this->db->where($this->primary_key, $id_verifikasi);
-        $this->db->update($this->table_name, $person);
+        $this->db->update($this->table_name, $verifikasi);
     }
 
     function delete($id_verifikasi)
@@ -52,9 +52,19 @@ class verifikasi_model extends CI_Model
     function getVerfikasiJoin()
     {
         $query = "SELECT id_verifikasi, nama, nama_iuran, tb_verifikasi.status FROM tb_verifikasi 
-     INNER JOIN tb_user ON tb_user.id_user = tb_verifikasi.id_user
-     INNER JOIN tb_iuran ON tb_iuran.id_iuran = tb_verifikasi.id_iuran";
+        INNER JOIN tb_user ON tb_user.id_user = tb_verifikasi.id_user
+        INNER JOIN tb_iuran ON tb_iuran.id_iuran = tb_verifikasi.id_iuran";
 
         return $this->db->query($query)->result();
+    }
+
+    function getVerifikasiJoinById($id_verifikasi)
+    {
+        $this->db->select("*");
+        $this->db->from('tb_verifikasi');
+        $this->db->join('tb_user', 'tb_verifikasi.id_user = tb_user.id_user');
+        $this->db->join('tb_iuran', 'tb_verifikasi.id_iuran = tb_iuran.id_iuran');
+        $this->db->where('tb_verifikasi.id_verifikasi', $id_verifikasi);
+        return $this->db->get()->row_array();
     }
 }

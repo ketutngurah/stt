@@ -37,6 +37,7 @@ class Verifikasi extends CI_Controller
         $this->pagination->initialize($config);
         $data['pagination'] = $this->pagination->create_links();
 
+
         // generate table data
         $tmpl = array('table_open'  => '<table class="table table-borderless">');
 
@@ -55,13 +56,18 @@ class Verifikasi extends CI_Controller
 
         $i = 0 + (int) $offset;
         foreach ($verifikasis as $verifikasi) {
+            if ($verifikasi->status == 0) {
+                $status = 'Belum Lunas';
+            } else if ($verifikasi->status == 1) {
+                $status = 'Lunas';
+            }
             $this->table->add_row(
                 ++$i,
                 $verifikasi->nama,
                 $verifikasi->nama_iuran,
-                $verifikasi->status,
+                $status,
 
-                anchor('verifikasi/update/' . $verifikasi->id_verifikasi, 'update', array('class' => 'btn btn-success'))
+                anchor('verifikasi/update/' . $verifikasi->id_verifikasi, 'detail', array('class' => 'btn btn-success'))
             );
         }
         $data['table'] = $this->table->generate();
@@ -77,55 +83,9 @@ class Verifikasi extends CI_Controller
         $this->load->view('templates/new_footer');
     }
 
-    function add()
-    {
-        $data['title'] = 'Tambah Verifikasi';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
-        $this->load->view('templates/new_header', $data);
-        $this->load->view('templates/new_sidebar');
-        $this->load->view('templates/new_topbar');
-
-        // set common properties
-        $data['action'] = site_url('verifikasi/add');
-        $data['link_back'] = anchor('verifikasi/index/', 'Back to list of verifikasis', array('class' => 'back'));
-
-        $this->_set_rules();
-
-        // run validation
-        if ($this->form_validation->run() === FALSE) {
-            $data['message'] = '';
-            // set common properties
-            $data['title'] = 'Tambah verifikasi Baru';
-            $data['message'] = '';
-            $data['verifikasi']['id_verifikasi'] = '';
-            $data['verifikasi']['nama_verifikasi'] = '';
-            $data['verifikasi']['tgl_verifikasi'] = '';
-            $data['verifikasi']['ket_verifikasi'] = '';
-            $data['link_back'] = anchor('verifikasi/index/', 'Lihat Daftar verifikasi', array('class' => 'back'));
-            $this->load->view('verifikasi/verifikasiEdit', $data);
-        } else {
-
-            // save data
-            $verifikasi = array(
-                'id_verifikasi' => $this->input->post('id_verifikasi'),
-                'nama_verifikasi' => $this->input->post('nama_verifikasi'),
-                'tgl_verifikasi' => $this->input->post('tgl_verifikasi'),
-                'ket_verifikasi' => $this->input->post('ket_verifikasi'),
-            );
-            $id_verifikasi = $this->verifikasi_model->save($verifikasi);
-
-            // set form input 
-            $this->validation->id_verifikasi = $id_verifikasi;
-            redirect('verifikasi');
-
-            redirect('verifikasi/index/add_success');
-        }
-        $this->load->view('templates/new_footer');
-    }
-
     function view($id_verifikasi)
     {
-        $data['title'] = 'Detail Data verifikasi';
+        $data['title'] = 'Detail Data Verifikasi';
         // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
@@ -138,6 +98,7 @@ class Verifikasi extends CI_Controller
         // get details
         $data['verifikasi'] = $this->verifikasi_model->get_by_id($id_verifikasi)->row();
 
+
         // load view
         $this->load->view('verifikasi/verifikasiView', $data);
         $this->load->view('templates/new_footer');
@@ -145,14 +106,14 @@ class Verifikasi extends CI_Controller
 
     function update($id_verifikasi)
     {
-        $data['title'] = 'Update Data verifikasi';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
+        $data['title'] = 'Update Data Verifikasi';
+
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
 
         // set common properties
-        $data['title'] = 'Update Data verifikasi';
+        $data['title'] = 'Update Data Verifikasi';
         $this->load->library('form_validation');
         // set validation properties
         $this->_set_rules();
@@ -162,57 +123,39 @@ class Verifikasi extends CI_Controller
         if ($this->form_validation->run() === FALSE) {
 
             $data['message'] = '';
-            $data['verifikasi'] = (array)$this->verifikasi_model->get_by_id($id_verifikasi)->row();
-
+            $data['verifikasi'] = (array)$this->verifikasi_model->getVerifikasiJoinById($id_verifikasi);
+            // var_dump($data['verifikasi']);
+            // die;
             // set common properties
-            $data['title'] = 'Update Data verifikasi';
+            $data['title'] = 'Update Data Verifikasi';
             $data['message'] = '';
         } else {
             // save data
             $id_verifikasi = $this->input->post('id_verifikasi');
             $verifikasi = array(
-                'id_verifikasi' => $this->input->post('id_verifikasi'),
-                'nama_verifikasi' => $this->input->post('nama_verifikasi'),
-                'tgl_verifikasi' => $this->input->post('tgl_verifikasi'),
-                'ket_verifikasi' => $this->input->post('ket_verifikasi'),
+                'status' => $this->input->post('status'),
             );
 
+            // var_dump($id_verifikasi);
+            // die;
+            // $this->db->where($this->primary_key, $id_verifikasi);
             $this->verifikasi_model->update($id_verifikasi, $verifikasi);
-            $data['verifikasi'] = (array)$this->verifikasi_model->get_by_id($id_verifikasi)->row();
+            // $data['verifikasi'] = (array)$this->verifikasi_model->get_by_id($id_verifikasi)->row();
+
             redirect('verifikasi');
             // set user message
             $data['message'] = 'Update Success';
         }
-        $data['link_back'] = anchor('verifikasi/index/', 'Daftar Data verifikasi', array('class' => 'back'));
+        $data['link_back'] = anchor('verifikasi/index/', 'Daftar Data Verifikasi', array('class' => 'back'));
         // load view
         $this->load->view('verifikasi/verifikasiEdit', $data);
         $this->load->view('templates/new_footer');
     }
 
-    function delete($id_verifikasi)
-    {
-        // delete
-        $this->verifikasi_model->delete($id_verifikasi);
-        // redirect to list page
-        redirect('verifikasi/index/delete_success', 'refresh');
-    }
-
     // validation rules
     function _set_rules()
     {
-        $this->form_validation->set_rules('nama_verifikasi', 'Nama verifikasi', 'required|trim');
-        $this->form_validation->set_rules('tgl_verifikasi', 'Tanggal', 'required|trim');
-        $this->form_validation->set_rules('ket_verifikasi', 'Keterangan verifikasi', 'required|trim');
-    }
 
-    function verifikasi()
-    {
-
-        // ini cuma bisa diakses oleh user
-    }
-    function bayar()
-    {
-        // ini cumab isa diaskes leh anggota
-
+        $this->form_validation->set_rules('status', 'Status', 'required|trim');
     }
 }

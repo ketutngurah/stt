@@ -25,7 +25,7 @@
 				</div>
 
 				<div class="form-group">
-					<label for="tgl_donasi">Tanggal Donasi</label>
+					<label for="tgl_donasi">Tanggal</label>
 					<input type="date" name="tgl_donasi" id="tgl_donasi" class="form-control" value="<?php echo (set_value('tgl_donasi')) ? set_value('tgl_donasi') : $donatur['tgl_donasi']; ?>" />
 					<?php echo form_error('tgl_donasi'); ?>
 				</div>

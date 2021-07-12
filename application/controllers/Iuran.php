@@ -100,7 +100,7 @@ class Iuran extends CI_Controller
             $data['iuran']['nama_iuran'] = '';
             $data['iuran']['tgl_iuran'] = '';
             $data['iuran']['ket_iuran'] = '';
-            $data['link_back'] = anchor('iuran/index/', 'Lihat Daftar iuran', array('class' => 'back'));
+            $data['link_back'] = anchor('iuran/index/', 'Lihat Daftar Iuran', array('class' => 'back'));
             $this->load->view('iuran/iuranEdit', $data);
         } else {
 
@@ -132,7 +132,7 @@ class Iuran extends CI_Controller
 
         // set common properties
         $data['title'] = 'Detail Data Iuran';
-        $data['link_back'] = anchor('iuran/index/', 'Daftar iuran', array('class' => 'back'));
+        $data['link_back'] = anchor('iuran/index/', 'Daftar Iuran', array('class' => 'back'));
 
         // get details
         $data['iuran'] = $this->iuran_model->get_by_id($id_iuran)->row();
@@ -218,6 +218,7 @@ class Iuran extends CI_Controller
 
         // load data
         $iurans = $this->iuran_model->get_paged_list(10, $offset, $order_column, $order_type)->result();
+        // $iurans = $this->iuran_model->get_iuran();
 
         // generate pagination
         $this->load->library('pagination');
@@ -238,7 +239,7 @@ class Iuran extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('iuran/index/' . $offset . '/nama_iuran/' . $new_order, 'Iuran'),
+            anchor('iuran/index/' . $offset . '/nama_iuran/' . $new_order, 'Nama Iuran'),
             anchor('iuran/index/' . $offset . '/tgl_iuran/' . $new_order, 'Tanggal'),
             anchor('iuran/index/' . $offset . '/ket_iuran/' . $new_order, 'Keterangan'),
             'Actions'

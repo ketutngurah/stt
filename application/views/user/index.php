@@ -19,8 +19,20 @@
                     <p class="card-text"><?= $user['email']; ?></p>
                     <h5 class="font-weight-bold">Alamat</h5>
                     <p class="card-text"><?= $user['alamat']; ?></p>
+                    <h5 class="font-weight-bold">Jenis Kelamin</h5>
+                    <p class="card-text"><?= $user['jk']; ?></p>
+                    <h5 class="font-weight-bold">Hobi</h5>
+                    <p class="card-text"><?= $user['hobi']; ?></p>
                     <h5 class="font-weight-bold">Telepon</h5>
                     <p class="card-text"><?= $user['telp']; ?></p>
+                    <h5 class="font-weight-bold">Pekerjaan</h5>
+                    <p class="card-text"><?= $user['pekerjaan']; ?></p>
+                    <h5 class="font-weight-bold">Nama Orang Tua</h5>
+                    <p class="card-text"><?= $user['nama_ortu']; ?></p>
+                    <h5 class="font-weight-bold">Telepon Orang Tua</h5>
+                    <p class="card-text"><?= $user['telp_ortu']; ?></p>
+                    <h5 class="font-weight-bold">Email</h5>
+                    <p class="card-text"><?= $user['email']; ?></p>
                 </div>
             </div>
         </div>

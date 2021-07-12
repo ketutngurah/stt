@@ -2,9 +2,8 @@
 	<h1 class="ml-3"><?php echo $title; ?></h1>
 	<?php echo $message; ?>
 	<?php echo validation_errors(); ?>
-	<?php echo form_open($action); ?>
-	<div class="container">
-		<form>
+	<form action="<?= $action; ?>" method="post" enctype="multipart/form-data">
+		<div class="container">
 			<div class="form-group">
 				<label for="id_kegiatan">ID Kegiatan</label>
 				<input type="text" name="id_kegiatan" id="id_kegiatan" disabled="disable" class="form-control" value="<?php echo (isset($kegiatan['id_kegiatan'])) ? $kegiatan['id_kegiatan'] : ''; ?>" />
@@ -40,8 +39,7 @@
 			<div class="form-group">
 				<input type="submit" class="btn btn-info" value="Save" />
 			</div>
-		</form>
-	</div>
+		</div>
 	</form>
 	<div class="ml-3 p-2">
 		<a href="<?= base_url('kegiatan'); ?>" class="btn btn-success">

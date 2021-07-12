@@ -14,7 +14,6 @@ class Rapat extends CI_Controller
     public function index($offset = 0, $order_column = 'id_rapat', $order_type = 'asc')
     {
         $data['title'] = 'List Rapat';
-        // $data['user'] = $this->db->get_where('tb_pengurus', ['nama_pengurus' => $this->session->userdata('nama_pengurus')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -82,7 +81,6 @@ class Rapat extends CI_Controller
     function add()
     {
         $data['title'] = 'Tambah Rapat';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -160,7 +158,6 @@ class Rapat extends CI_Controller
     function update($id_rapat)
     {
         $data['title'] = 'Update Data Rapat';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -188,25 +185,43 @@ class Rapat extends CI_Controller
             $this->load->library('upload', $config);
             if ($this->upload->do_upload('file_rapat')) {
                 $this->upload->data('file_name');
+                $id_rapat = $this->input->post('id_rapat');
+                $rapat = array(
+                    'id_rapat' => $this->input->post('id_rapat'),
+                    'nama_rapat' => $this->input->post('nama_rapat'),
+                    'tgl_rapat' => $this->input->post('tgl_rapat'),
+                    'ket_rapat' => $this->input->post('ket_rapat'),
+                    'file_rapat' => $_FILES['file_rapat']['name'],
+                );
+
+                $id_rapat = $this->rapat_model->update($id_rapat, $rapat);
+                $data['rapat'] = (array)$this->rapat_model->get_by_id($id_rapat)->row();
+
+                $this->validation->id_rapat = $id_rapat;
+                redirect('rapat');
+                // set user message
+                $data['message'] = 'Update Success';
+            } else {
+                $id_rapat = $this->input->post('id_rapat');
+                $rapat = array(
+                    'id_rapat' => $this->input->post('id_rapat'),
+                    'nama_rapat' => $this->input->post('nama_rapat'),
+                    'tgl_rapat' => $this->input->post('tgl_rapat'),
+                    'ket_rapat' => $this->input->post('ket_rapat'),
+                );
+
+                $id_rapat = $this->rapat_model->update($id_rapat, $rapat);
+                $data['rapat'] = (array)$this->rapat_model->get_by_id($id_rapat)->row();
+
+                $this->validation->id_rapat = $id_rapat;
+                redirect('rapat');
+                // set user message
+                $data['message'] = 'Update Success';
             }
 
+
             // save data
-            $id_rapat = $this->input->post('id_rapat');
-            $rapat = array(
-                'id_rapat' => $this->input->post('id_rapat'),
-                'nama_rapat' => $this->input->post('nama_rapat'),
-                'tgl_rapat' => $this->input->post('tgl_rapat'),
-                'ket_rapat' => $this->input->post('ket_rapat'),
-                'file_rapat' => $_FILES['file_rapat']['name'],
-            );
 
-            $id_rapat = $this->rapat_model->update($id_rapat, $rapat);
-            $data['rapat'] = (array)$this->rapat_model->get_by_id($id_rapat)->row();
-
-            $this->validation->id_rapat = $id_rapat;
-            redirect('rapat');
-            // set user message
-            $data['message'] = 'Update Success';
         }
         $data['link_back'] = anchor('rapat/index/', 'Daftar Data Rapat', array('class' => 'back'));
         // load view
@@ -288,14 +303,6 @@ class Rapat extends CI_Controller
         $this->load->view('templates/new_footer');
     }
 
-    // validation rules
-    function _set_rules()
-    {
-        $this->form_validation->set_rules('nama_rapat', 'Nama Rapat', 'required|trim');
-        $this->form_validation->set_rules('tgl_rapat', 'Tanggal', 'required|trim');
-        $this->form_validation->set_rules('ket_rapat', 'Keterangan Rapat', 'required|trim');
-    }
-
     function download($id)
     {
         // SELECT file_rapat FROM tb_rapat WHERE id_rapat = $id
@@ -320,5 +327,13 @@ class Rapat extends CI_Controller
         $data = file_get_contents('./uploads/' . $file);
         force_download($name, $data);
         redirect('rapat');
+    }
+
+    // validation rules
+    function _set_rules()
+    {
+        $this->form_validation->set_rules('nama_rapat', 'Nama Rapat', 'required|trim');
+        $this->form_validation->set_rules('tgl_rapat', 'Tanggal', 'required|trim');
+        $this->form_validation->set_rules('ket_rapat', 'Keterangan Rapat', 'required|trim');
     }
 }
