@@ -79,7 +79,6 @@ class Iuran extends CI_Controller
     function add()
     {
         $data['title'] = 'Tambah Iuran';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -145,7 +144,6 @@ class Iuran extends CI_Controller
     function update($id_iuran)
     {
         $data['title'] = 'Update Data Iuran';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -264,7 +262,7 @@ class Iuran extends CI_Controller
 
     function viewUser($id_iuran)
     {
-        $data['title'] = 'Iuran';
+        $data['title'] = 'Bayar Iuran';
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');

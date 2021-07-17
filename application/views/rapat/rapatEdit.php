@@ -17,7 +17,6 @@
 				<?php echo form_error('nama_rapat'); ?>
 			</div>
 
-
 			<div class="form-group">
 				<label for="tgl_rapat">Tanggal</label>
 				<input type="date" name="tgl_rapat" id="tgl_rapat" class="form-control" value="<?php echo (set_value('tgl_rapat')) ? set_value('tgl_rapat') : $rapat['tgl_rapat']; ?>" />

@@ -3,7 +3,11 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
-
+    <div class="ml-2 p-2">
+        <a href="<?= base_url('user/edit'); ?>" class="btn btn-success">
+            Edit Profil
+        </a>
+    </div>
     <div class="row">
         <div class="col-lg-8">
             <?= $this->session->flashdata('message'); ?>
@@ -15,8 +19,8 @@
                 <div class="card-body">
                     <h5 class="font-weight-bold">Nama Lengkap</h5>
                     <p class="card-title"><?= $user['nama']; ?></p>
-                    <h5 class="font-weight-bold">Username</h5>
-                    <p class="card-text"><?= $user['email']; ?></p>
+                    <h5 class="font-weight-bold">Tanggal Lahir</h5>
+                    <p class="card-text"><?= $user['tgl_lahir']; ?></p>
                     <h5 class="font-weight-bold">Alamat</h5>
                     <p class="card-text"><?= $user['alamat']; ?></p>
                     <h5 class="font-weight-bold">Jenis Kelamin</h5>
@@ -31,8 +35,6 @@
                     <p class="card-text"><?= $user['nama_ortu']; ?></p>
                     <h5 class="font-weight-bold">Telepon Orang Tua</h5>
                     <p class="card-text"><?= $user['telp_ortu']; ?></p>
-                    <h5 class="font-weight-bold">Email</h5>
-                    <p class="card-text"><?= $user['email']; ?></p>
                 </div>
             </div>
         </div>

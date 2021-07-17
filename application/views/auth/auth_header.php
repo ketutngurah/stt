@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bengkel Jaya Abadi | <?= $title; ?></title>
+    <title>STT. BHUANA KUSUMA | <?= $title; ?></title>
 
     <style>
         .center {
