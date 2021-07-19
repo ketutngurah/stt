@@ -11,6 +11,47 @@ class donatur_model extends CI_Model
         parent::__construct();
     }
 
+    public function view_by_date($date)
+    {
+        $this->db->where('DATE(tgl_donasi)', $date); // Tambahkan where tanggal nya
+
+        return $this->db->get('tb_donatur')->result(); // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+    }
+
+    public function view_by_month($month, $year)
+    {
+        $this->db->where('MONTH(tgl_donasi)', $month); // Tambahkan where bulan
+        $this->db->where('YEAR(tgl_donasi)', $year); // Tambahkan where tahun
+
+        return $this->db->get('tb_donatur')->result(); // Tampilkan data transaksi sesuai bulan dan tahun yang diinput oleh user pada filter
+    }
+
+    public function view_by_year($year)
+    {
+        $this->db->where('YEAR(tgl_donasi)', $year); // Tambahkan where tahun
+
+        return $this->db->get('tb_donatur')->result(); // Tampilkan data transaksi sesuai tahun yang diinput oleh user pada filter
+    }
+
+    public function view_all()
+    {
+        return $this->db->get('tb_donatur')->result(); // Tampilkan semua data transaksi
+    }
+
+    public function option_tahun()
+    {
+        $this->db->select('YEAR(tgl_donasi) AS tahun'); // Ambil Tahun dari field tgl_donasi
+        $this->db->from('tb_donatur'); // select ke tabel transaksi
+        $this->db->order_by('YEAR(tgl_donasi)'); // Urutkan berdasarkan tahun secara Ascending (ASC)
+        $this->db->group_by('YEAR(tgl_donasi)'); // Group berdasarkan tahun pada field tgl_donasi
+
+        return $this->db->get()->result(); // Ambil data pada tabel transaksi sesuai kondisi diatas
+    }
+    // function tampil_data()
+    // {
+    //     return $this->db->get('tb_donatur');
+    // }
+
     function get_paged_list($limit = 10, $offset = 0, $order_column = '', $order_type = 'asc')
     {
         if (empty($order_column) || empty($order_type))

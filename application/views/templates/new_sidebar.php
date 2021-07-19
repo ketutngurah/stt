@@ -31,48 +31,6 @@
 
             <?php endforeach;    ?>
 
-            <!-- <li>
-                <a href="<?= base_url('user'); ?>">
-                    <i class="nc-icon nc-single-02"></i>
-                    <p>Profil</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?= base_url('rapat'); ?>">
-                    <i class="nc-icon nc-bank"></i>
-                    <p>Rapat</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?= base_url('piket'); ?>">
-                    <i class="nc-icon nc-diamond"></i>
-                    <p>Piket</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?= base_url('kegiatan'); ?>">
-                    <i class="nc-icon nc-pin-3"></i>
-                    <p>Kegiatan</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?= base_url('iuran'); ?>">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>Iuran</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?= base_url('verifikasi'); ?>">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>Verifikasi</p>
-                </a>
-            </li>
-            <li>
-                <a href="<?= base_url('donatur'); ?>">
-                    <i class="nc-icon nc-bell-55"></i>
-                    <p>Donatur</p>
-                </a>
-            </li> -->
             <li>
                 <a href="<?= base_url('auth/logout'); ?>">
                     <i class="nc-icon nc-tile-56"></i>

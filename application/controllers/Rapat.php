@@ -138,7 +138,6 @@ class Rapat extends CI_Controller
     function view($id_rapat)
     {
         $data['title'] = 'Detail Data Rapat';
-        // $data['user'] = $this->db->get_where('tb_admin', ['username' => $this->session->userdata('username')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');

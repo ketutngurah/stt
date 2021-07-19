@@ -9,6 +9,7 @@ class Donatur extends CI_Controller
         $this->load->library(array('table', 'form_validation'));
         $this->load->helper(array('form', 'url'));
         $this->load->model('donatur_model', '', TRUE);
+        $this->load->model('donatur_model');
     }
 
     public function index($offset = 0, $order_column = 'id_donatur', $order_type = 'asc')

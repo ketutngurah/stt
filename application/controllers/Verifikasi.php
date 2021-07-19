@@ -92,8 +92,8 @@ class Verifikasi extends CI_Controller
         $this->load->view('templates/new_topbar');
 
         // set common properties
-        $data['title'] = 'Detail Data verifikasi';
-        $data['link_back'] = anchor('verifikasi/index/', 'Daftar verifikasi', array('class' => 'back'));
+        $data['title'] = 'Detail Data Verifikasi';
+        $data['link_back'] = anchor('verifikasi/index/', 'Daftar Verifikasi', array('class' => 'back'));
 
         // get details
         $data['verifikasi'] = $this->verifikasi_model->get_by_id($id_verifikasi)->row();
@@ -124,8 +124,7 @@ class Verifikasi extends CI_Controller
 
             $data['message'] = '';
             $data['verifikasi'] = (array)$this->verifikasi_model->getVerifikasiJoinById($id_verifikasi);
-            // var_dump($data['verifikasi']);
-            // die;
+
             // set common properties
             $data['title'] = 'Update Data Verifikasi';
             $data['message'] = '';
@@ -136,8 +135,6 @@ class Verifikasi extends CI_Controller
                 'status' => $this->input->post('status'),
             );
 
-            // var_dump($id_verifikasi);
-            // die;
             // $this->db->where($this->primary_key, $id_verifikasi);
             $this->verifikasi_model->update($id_verifikasi, $verifikasi);
             // $data['verifikasi'] = (array)$this->verifikasi_model->get_by_id($id_verifikasi)->row();
@@ -155,7 +152,6 @@ class Verifikasi extends CI_Controller
     // validation rules
     function _set_rules()
     {
-
         $this->form_validation->set_rules('status', 'Status', 'required|trim');
     }
 }

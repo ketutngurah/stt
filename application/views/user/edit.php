@@ -21,6 +21,12 @@
             </div>
 
             <div class="form-group">
+                <label for="alamat">Alamat</label>
+                <input type="text" name="alamat" id="alamat" class="form-control" value="<?php echo (set_value('alamat')) ? set_value('alamat') : $tb_user['alamat']; ?>" />
+                <?php echo form_error('alamat'); ?>
+            </div>
+
+            <div class="form-group">
                 <label for="jk">Jenis Kelamin</label>
             </div>
             <div class="form-group row">

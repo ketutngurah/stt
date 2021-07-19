@@ -42,7 +42,6 @@ class User extends CI_Controller
             $pekerjaan = $this->input->post('pekerjaan');
             $nama_ortu = $this->input->post('nama_ortu');
             $telp_ortu = $this->input->post('telp_ortu');
-            $email = $this->input->post('email');
 
             $this->db->set('nama', $nama);
             $this->db->set('tgl_lahir', $tgl_lahir);
@@ -53,11 +52,11 @@ class User extends CI_Controller
             $this->db->set('nama_ortu', $nama_ortu);
             $this->db->set('telp_ortu', $telp_ortu);
 
-            $this->db->where('email', $email);
+            $this->db->where('email', $this->session->userdata('email'));
             $this->db->update('tb_user');
 
             $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Your profile has been updated!</div>');
+            Profil Berhasil Diubah!</div>');
             redirect('user');
         }
     }
