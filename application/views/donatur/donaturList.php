@@ -11,9 +11,8 @@
 				<i class="fa fa-plus" aria-hidden="true"></i>
 				Tambah Donatur Baru
 			</a>
-
-			<a href="<?= base_url('laporan'); ?>" class="btn btn-info">
-				Print
+			<a href="<?= base_url('laporandonatur'); ?>" class="btn btn-info">
+				Laporan
 			</a>
 		</div>
 		<div class="col-lg text-right">

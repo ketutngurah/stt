@@ -215,9 +215,10 @@ class Iuran extends CI_Controller
         //TODO: check for valid column
 
         // load data
-        $iurans = $this->iuran_model->get_paged_list(10, $offset, $order_column, $order_type)->result();
-        // $iurans = $this->iuran_model->get_iuran();
-
+        // $iurans = $this->iuran_model->get_paged_list(10, $offset, $order_column, $order_type)->result();
+        $iurans = $this->iuran_model->get_iuran();
+        // var_dump($iurans);
+        // die;
         // generate pagination
         $this->load->library('pagination');
         $config['base_url'] = site_url('iuran/bayar_iuran/');
@@ -244,7 +245,7 @@ class Iuran extends CI_Controller
         );
 
         $i = 0 + (int) $offset;
-        foreach ($iurans as $iuran) {
+        foreach ($iurans->result() as $iuran) {
             $this->table->add_row(
                 ++$i,
                 $iuran->nama_iuran,
