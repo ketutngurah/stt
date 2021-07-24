@@ -24,7 +24,7 @@
     <div class="ml-2 p-2">
         <a href="<?= base_url('iuran'); ?>" class="btn btn-success">
             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-            Daftar Data Iuran
+            Kembali
         </a>
     </div>
 

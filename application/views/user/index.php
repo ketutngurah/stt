@@ -3,9 +3,10 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-4 text-gray-800"><?= $title; ?></h1>
+    <!-- <?php echo $this->session->userdata('id_user'); ?> -->
     <div class="ml-2 p-2">
         <a href="<?= base_url('user/edit'); ?>" class="btn btn-success">
-            Edit Profil
+            Edit
         </a>
     </div>
     <div class="row">

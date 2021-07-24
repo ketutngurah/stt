@@ -67,7 +67,7 @@ class Verifikasi extends CI_Controller
                 $verifikasi->nama_iuran,
                 $status,
 
-                anchor('verifikasi/update/' . $verifikasi->id_verifikasi, 'detail', array('class' => 'btn btn-success'))
+                anchor('verifikasi/update/' . $verifikasi->id_verifikasi, ' ', array('class' => 'btn btn-success nc-icon nc-zoom-split', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Detail"))
             );
         }
         $data['table'] = $this->table->generate();
@@ -153,5 +153,72 @@ class Verifikasi extends CI_Controller
     function _set_rules()
     {
         $this->form_validation->set_rules('status', 'Status', 'required|trim');
+    }
+
+    function status_ver($offset = 0, $order_column = 'id_verifikasi', $order_type = 'asc')
+    {
+        // $data['title'] = 'List Verifikasi';
+        $data['user'] = $this->db->get_where('tb_user', ['id_user' => $this->session->userdata('id_user')])->row_array();
+        $this->load->view('templates/new_header', $data);
+        $this->load->view('templates/new_sidebar');
+        $this->load->view('templates/new_topbar');
+
+        if (empty($offset)) $offset = 0;
+        if (empty($order_column)) $order_column = 'id_iuran';
+        if (empty($order_type)) $order_type = 'asc';
+        //TODO: check for valid column
+
+        $id = $this->session->userdata('id_user');
+        // load data
+        $verifikasis = $this->verifikasi_model->getVerifikasiUser($id)->result();
+
+        // generate pagination
+        $this->load->library('pagination');
+        $config['base_url'] = site_url('verifikasi/index/');
+        $config['total_rows'] = $this->verifikasi_model->count_all();
+        $config['per_page'] = 10;
+        $config['uri_segment'] = 3;
+        $this->pagination->initialize($config);
+        $data['pagination'] = $this->pagination->create_links();
+
+
+        // generate table data
+        $tmpl = array('table_open'  => '<table class="table table-borderless">');
+
+        $this->table->set_template($tmpl);
+
+        $this->load->library('table');
+        $this->table->set_empty("&nbsp;");
+        $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
+        $this->table->set_heading(
+            'No',
+            anchor('verifikasi/index/' . $offset . '/id_iuran/' . $new_order, 'Nama Iuran'),
+            anchor('verifikasi/index/' . $offset . '/status/' . $new_order, 'Status')
+        );
+
+        $i = 0 + (int) $offset;
+        foreach ($verifikasis as $verifikasi) {
+            // if ($verifikasi->status == 0) {
+            //     $status = 'Belum Lunas';
+            // } else if ($verifikasi->status == 1) {
+            //     $status = 'Lunas';
+            // }
+            $this->table->add_row(
+                ++$i,
+                $verifikasi->nama_iuran,
+                $verifikasi->status == '0' ? 'Belum Lunas' : 'Lunas'
+            );
+        }
+        $data['table'] = $this->table->generate();
+
+        if ($this->uri->segment(3) == 'delete_success')
+            $data['message'] = 'Data berhasil dihapus';
+        else if ($this->uri->segment(3) == 'add_success')
+            $data['message'] = 'Data berhasil ditambah';
+        else
+            $data['message'] = '';
+        // load view
+        $this->load->view('verifikasi/verifikasiAnggota', $data);
+        $this->load->view('templates/new_footer');
     }
 }

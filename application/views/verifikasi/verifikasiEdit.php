@@ -63,7 +63,7 @@
 <div class="ml-3 p-2">
     <a href="<?= base_url('verifikasi'); ?>" class="btn btn-success">
         <i class="fa fa-angle-double-left" aria-hidden="true"></i>
-        Daftar Data Verifikasi
+        Kembali
     </a>
 </div>
 </div>
@@ -74,7 +74,6 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

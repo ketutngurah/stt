@@ -60,9 +60,9 @@ class Piket extends CI_Controller
                 $piket->tgl_piket,
                 $piket->ket_piket,
                 $piket->file_piket,
-                anchor('piket/view/' . $piket->id_piket, 'view', array('class' => 'btn btn-warning')) . ' ' .
-                    anchor('piket/update/' . $piket->id_piket, 'update', array('class' => 'btn btn-success')) . ' ' .
-                    anchor('piket/delete/' . $piket->id_piket, 'delete', array('class' => 'btn btn-danger', 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data piket ini?')"))
+                anchor('piket/view/' . $piket->id_piket, ' ', array('class' => 'btn btn-warning nc-icon nc-paper', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "View")) . ' ' .
+                    anchor('piket/update/' . $piket->id_piket, ' ', array('class' => 'btn btn-success nc-icon nc-settings', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Update")) . ' ' .
+                    anchor('piket/delete/' . $piket->id_piket, ' ', array('class' => 'btn btn-danger nc-icon nc-basket', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Delete", 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data piket ini?')"))
             );
         }
         $data['table'] = $this->table->generate();
@@ -289,7 +289,7 @@ class Piket extends CI_Controller
                 $piket->tgl_piket,
                 $piket->ket_piket,
                 $piket->file_piket,
-                anchor('piket/download/' . $piket->id_piket, 'download file', array('class' => 'btn btn-primary'))
+                anchor('piket/download/' . $piket->id_piket, ' ', array('class' => 'btn btn-primary nc-icon nc-cloud-download-93', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Download"))
             );
         }
         $data['table'] = $this->table->generate();

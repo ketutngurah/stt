@@ -58,9 +58,9 @@ class Iuran extends CI_Controller
                 $iuran->nama_iuran,
                 $iuran->tgl_iuran,
                 $iuran->ket_iuran,
-                anchor('iuran/view/' . $iuran->id_iuran, 'view', array('class' => 'btn btn-warning')) . ' ' .
-                    anchor('iuran/update/' . $iuran->id_iuran, 'update', array('class' => 'btn btn-success')) . ' ' .
-                    anchor('iuran/delete/' . $iuran->id_iuran, 'delete', array('class' => 'btn btn-danger', 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data iuran ini?')"))
+                anchor('iuran/view/' . $iuran->id_iuran, ' ', array('class' => 'btn btn-warning nc-icon nc-paper', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "View")) . ' ' .
+                    anchor('iuran/update/' . $iuran->id_iuran, ' ', array('class' => 'btn btn-success nc-icon nc-settings', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Update")) . ' ' .
+                    anchor('iuran/delete/' . $iuran->id_iuran, ' ', array('class' => 'btn btn-danger nc-icon nc-basket', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Delete", 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data iuran ini?')"))
             );
         }
         $data['table'] = $this->table->generate();
@@ -216,9 +216,10 @@ class Iuran extends CI_Controller
 
         // load data
         // $iurans = $this->iuran_model->get_paged_list(10, $offset, $order_column, $order_type)->result();
-        $iurans = $this->iuran_model->get_iuran();
+        $iurans = $this->iuran_model->get_iuran()->result();
         // var_dump($iurans);
         // die;
+
         // generate pagination
         $this->load->library('pagination');
         $config['base_url'] = site_url('iuran/bayar_iuran/');
@@ -245,13 +246,13 @@ class Iuran extends CI_Controller
         );
 
         $i = 0 + (int) $offset;
-        foreach ($iurans->result() as $iuran) {
+        foreach ($iurans as $iuran) {
             $this->table->add_row(
                 ++$i,
                 $iuran->nama_iuran,
                 $iuran->tgl_iuran,
                 $iuran->ket_iuran,
-                anchor('iuran/viewUser/' . $iuran->id_iuran, 'view', array('class' => 'btn btn-warning'))
+                anchor('iuran/viewUser/' . $iuran->id_iuran, ' ', array('class' => 'btn btn-warning nc-icon nc-zoom-split', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Lihat"))
             );
         }
         $data['table'] = $this->table->generate();
@@ -271,7 +272,6 @@ class Iuran extends CI_Controller
         // get details
         $data['iuran'] = $this->iuran_model->get_by_id($id_iuran)->row();
         $data['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
-
 
         // load view
         $this->load->view('iuran/iuranUpload', $data);

@@ -13,11 +13,10 @@ class Donatur extends CI_Controller
 
     public function index($offset = 0, $order_column = 'id_donatur', $order_type = 'asc')
     {
-        // $data['total_donasi'] = $this->db->select_sum('jumlah_donasi')->get('tb_donatur')->row_array();
+
         $query = $this->db->select('SUM(jumlah_donasi) as total_donasi')->from('tb_donatur')->get();
         $data['total_donasi'] = $query->row()->total_donasi;
         $data['title'] = 'List Donatur';
-        // $data['user'] = $this->db->get_where('tb_pengurus', ['nama_pengurus' => $this->session->userdata('nama_pengurus')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -64,9 +63,9 @@ class Donatur extends CI_Controller
                 $donatur->jumlah_donasi,
                 $donatur->tgl_donasi,
                 $donatur->ket_donasi,
-                anchor('donatur/view/' . $donatur->id_donatur, 'view', array('class' => 'btn btn-warning')) . ' ' .
-                    anchor('donatur/update/' . $donatur->id_donatur, 'update', array('class' => 'btn btn-success')) . ' ' .
-                    anchor('donatur/delete/' . $donatur->id_donatur, 'delete', array('class' => 'btn btn-danger', 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data donatur ini?')"))
+                anchor('donatur/view/' . $donatur->id_donatur, ' ', array('class' => 'btn btn-warning nc-icon nc-paper', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "View")) . ' ' .
+                    anchor('donatur/update/' . $donatur->id_donatur, ' ', array('class' => 'btn btn-success nc-icon nc-settings', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Update")) . ' ' .
+                    anchor('donatur/delete/' . $donatur->id_donatur, ' ', array('class' => 'btn btn-danger nc-icon nc-basket', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Delete", 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data donatur ini?')"))
             );
         }
         $data['table'] = $this->table->generate();

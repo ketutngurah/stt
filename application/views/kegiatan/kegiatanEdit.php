@@ -44,7 +44,7 @@
 	<div class="ml-3 p-2">
 		<a href="<?= base_url('kegiatan'); ?>" class="btn btn-success">
 			<i class="fa fa-angle-double-left" aria-hidden="true"></i>
-			Daftar Data Kegiatan
+			Kembali
 		</a>
 	</div>
 </div>

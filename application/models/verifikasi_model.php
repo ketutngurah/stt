@@ -67,4 +67,13 @@ class verifikasi_model extends CI_Model
         $this->db->where('tb_verifikasi.id_verifikasi', $id_verifikasi);
         return $this->db->get()->row_array();
     }
+
+    function getVerifikasiUser($id)
+    {
+        $this->db->select('*');
+        $this->db->from('tb_verifikasi');
+        $this->db->join('tb_iuran', 'tb_verifikasi.id_iuran = tb_iuran.id_iuran');
+        $this->db->where('id_user', $id);
+        return $this->db->get();
+    }
 }

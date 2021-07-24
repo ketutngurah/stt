@@ -61,9 +61,9 @@ class Kegiatan extends CI_Controller
                 $kegiatan->tgl_kegiatan,
                 $kegiatan->ket_kegiatan,
                 $kegiatan->file_kegiatan,
-                anchor('kegiatan/view/' . $kegiatan->id_kegiatan, 'view', array('class' => 'btn btn-warning')) . ' ' .
-                    anchor('kegiatan/update/' . $kegiatan->id_kegiatan, 'update', array('class' => 'btn btn-success')) . ' ' .
-                    anchor('kegiatan/delete/' . $kegiatan->id_kegiatan, 'delete', array('class' => 'btn btn-danger', 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data kegiatan ini?')"))
+                anchor('kegiatan/view/' . $kegiatan->id_kegiatan, ' ', array('class' => 'btn btn-warning nc-icon nc-paper', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "View")) . ' ' .
+                    anchor('kegiatan/update/' . $kegiatan->id_kegiatan, ' ', array('class' => 'btn btn-success nc-icon nc-settings', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Update")) . ' ' .
+                    anchor('kegiatan/delete/' . $kegiatan->id_kegiatan, ' ', array('class' => 'btn btn-danger nc-icon nc-basket', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Delete", 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data kegiatan ini?')"))
             );
         }
         $data['table'] = $this->table->generate();
@@ -290,7 +290,7 @@ class Kegiatan extends CI_Controller
                 $kegiatan->tgl_kegiatan,
                 $kegiatan->ket_kegiatan,
                 $kegiatan->file_kegiatan,
-                anchor('kegiatan/download/' . $kegiatan->id_kegiatan, 'download file', array('class' => 'btn btn-primary'))
+                anchor('kegiatan/download/' . $kegiatan->id_kegiatan, ' ', array('class' => 'btn btn-primary nc-icon nc-cloud-download-93', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Download File"))
             );
         }
         $data['table'] = $this->table->generate();

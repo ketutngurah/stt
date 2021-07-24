@@ -60,9 +60,9 @@ class Rapat extends CI_Controller
                 $rapat->tgl_rapat,
                 $rapat->ket_rapat,
                 $rapat->file_rapat,
-                anchor('rapat/view/' . $rapat->id_rapat, 'view', array('class' => 'btn btn-warning')) . ' ' .
-                    anchor('rapat/update/' . $rapat->id_rapat, 'update', array('class' => 'btn btn-success')) . ' ' .
-                    anchor('rapat/delete/' . $rapat->id_rapat, 'delete', array('class' => 'btn btn-danger', 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data rapat ini?')"))
+                anchor('rapat/view/' . $rapat->id_rapat, ' ', array('class' => 'btn btn-warning nc-icon nc-paper', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "View")) . ' ' .
+                    anchor('rapat/update/' . $rapat->id_rapat, ' ', array('class' => 'btn btn-success nc-icon nc-settings', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Update")) . ' ' .
+                    anchor('rapat/delete/' . $rapat->id_rapat, ' ', array('class' => 'btn btn-danger nc-icon nc-basket', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Delete", 'onclick' => "return confirm('Apakah anda yakin ingin menghapus data rapat ini?')"))
             );
         }
         $data['table'] = $this->table->generate();
@@ -286,7 +286,7 @@ class Rapat extends CI_Controller
                 $rapat->tgl_rapat,
                 $rapat->ket_rapat,
                 $rapat->file_rapat,
-                anchor('rapat/download/' . $rapat->id_rapat, 'download file', array('class' => 'btn btn-primary'))
+                anchor('rapat/download/' . $rapat->id_rapat, ' ', array('class' => 'btn btn-primary nc-icon nc-cloud-download-93', 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "View", 'data-toggle' => "tooltip", 'data-placement' => "right", 'title' => "Download File"))
             );
         }
         $data['table'] = $this->table->generate();
