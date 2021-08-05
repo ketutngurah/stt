@@ -47,10 +47,6 @@ class donatur_model extends CI_Model
 
         return $this->db->get()->result(); // Ambil data pada tabel transaksi sesuai kondisi diatas
     }
-    // function tampil_data()
-    // {
-    //     return $this->db->get('tb_donatur');
-    // }
 
     function get_paged_list($limit = 10, $offset = 0, $order_column = '', $order_type = 'asc')
     {

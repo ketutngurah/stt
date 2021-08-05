@@ -137,7 +137,6 @@ class Verifikasi extends CI_Controller
 
             // $this->db->where($this->primary_key, $id_verifikasi);
             $this->verifikasi_model->update($id_verifikasi, $verifikasi);
-            // $data['verifikasi'] = (array)$this->verifikasi_model->get_by_id($id_verifikasi)->row();
 
             redirect('verifikasi');
             // set user message
@@ -198,11 +197,6 @@ class Verifikasi extends CI_Controller
 
         $i = 0 + (int) $offset;
         foreach ($verifikasis as $verifikasi) {
-            // if ($verifikasi->status == 0) {
-            //     $status = 'Belum Lunas';
-            // } else if ($verifikasi->status == 1) {
-            //     $status = 'Lunas';
-            // }
             $this->table->add_row(
                 ++$i,
                 $verifikasi->nama_iuran,

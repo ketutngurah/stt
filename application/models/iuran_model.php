@@ -63,16 +63,4 @@ class iuran_model extends CI_Model
         $this->db->where($this->primary_key, $id_iuran);
         $this->db->delete($this->table_name);
     }
-
-    // public function sudahBayar()
-    // {
-    //     $this->db->select('*');
-    //     $this->db->from('tb_user');
-    //     $this->db->join('tb_verifikasi', 'tb_user.id_user = tb_verifikasi.id_user');
-    //     $this->db->join('tb_iuran', 'tb_iuran.id_iuran = tb_verifikasi.id_iuran');
-    //     $this->db->where(['email' => $this->session->userdata('email'), 'status' => 1]);
-    //     $this->db->group_by('tb_iuran.id_iuran');
-    //     $this->db->order_by('tb_iuran.id_iuran', 'ASC');
-    //     return $this->db->get();
-    // }
 }

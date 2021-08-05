@@ -22,7 +22,7 @@
                 <td valign="top">File</td>
                 <td>
                     <php echo $iuran->file_verifikasi; ?>
-                        <img class="img-fluid" src="<? base_url() ?>uploads/<?= $iuran->file_verifikasi ?>" />
+                        <img src="<? base_url() ?>uploads/<?= $iuran->file_verifikasi ?>" />
                 </td>
             </tr>
         </table>
