@@ -128,6 +128,8 @@ class Piket extends CI_Controller
 
             // set form input 
             $this->validation->id_piket = $id_piket;
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Ditambah!</div>');
             redirect('piket');
 
             redirect('piket/index/add_success');
@@ -220,6 +222,8 @@ class Piket extends CI_Controller
                 $data['piket'] = (array)$this->piket_model->get_by_id($id_piket)->row();
 
                 $this->validation->id_piket = $id_piket;
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Diubah!</div>');
                 redirect('piket');
                 // set user message
                 $data['message'] = 'Update Success';
@@ -235,7 +239,8 @@ class Piket extends CI_Controller
     {
         // delete
         $this->piket_model->delete($id_piket);
-        // redirect to list page
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Dihapus!</div>');
         redirect('piket/index/delete_success', 'refresh');
     }
 

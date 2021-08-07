@@ -114,6 +114,8 @@ class Iuran extends CI_Controller
 
             // set form input 
             $this->validation->id_iuran = $id_iuran;
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Ditambah!</div>');
             redirect('iuran');
 
             redirect('iuran/index/add_success');
@@ -176,6 +178,8 @@ class Iuran extends CI_Controller
 
             $this->iuran_model->update($id_iuran, $iuran);
             $data['iuran'] = (array)$this->iuran_model->get_by_id($id_iuran)->row();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Diubah!</div>');
             redirect('iuran');
             // set user message
             $data['message'] = 'Update Success';
@@ -190,6 +194,8 @@ class Iuran extends CI_Controller
     {
         // delete
         $this->iuran_model->delete($id_iuran);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Dihapus!</div>');
         // redirect to list page
         redirect('iuran/index/delete_success', 'refresh');
     }

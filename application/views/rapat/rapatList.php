@@ -5,7 +5,6 @@
 	<div class="data"><?php echo $table; ?></div>
 	<div class="paging"><?php echo $pagination; ?></div>
 
-
 	<div class="ml-2 p-2">
 		<a href="<?= base_url('rapat/add'); ?>" class="btn btn-success">
 			<i class="fa fa-plus" aria-hidden="true"></i>

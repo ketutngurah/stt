@@ -128,8 +128,9 @@ class Rapat extends CI_Controller
 
             // set form input 
             $this->validation->id_rapat = $id_rapat;
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Ditambah!</div>');
             redirect('rapat');
-
             redirect('rapat/index/add_success');
         }
         $this->load->view('templates/new_footer');
@@ -213,14 +214,12 @@ class Rapat extends CI_Controller
                 $data['rapat'] = (array)$this->rapat_model->get_by_id($id_rapat)->row();
 
                 $this->validation->id_rapat = $id_rapat;
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Diubah!</div>');
                 redirect('rapat');
                 // set user message
                 $data['message'] = 'Update Success';
             }
-
-
-            // save data
-
         }
         $data['link_back'] = anchor('rapat/index/', 'Daftar Data Rapat', array('class' => 'back'));
         // load view
@@ -233,6 +232,8 @@ class Rapat extends CI_Controller
         // delete
         $this->rapat_model->delete($id_rapat);
         // redirect to list page
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Dihapus!</div>');
         redirect('rapat/index/delete_success', 'refresh');
     }
 

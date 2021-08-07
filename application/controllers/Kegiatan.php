@@ -14,7 +14,6 @@ class Kegiatan extends CI_Controller
     public function index($offset = 0, $order_column = 'id_kegiatan', $order_type = 'asc')
     {
         $data['title'] = 'List Kegiatan';
-        // $data['user'] = $this->db->get_where('tb_pengurus', ['nama_pengurus' => $this->session->userdata('nama_pengurus')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -130,8 +129,9 @@ class Kegiatan extends CI_Controller
 
             // set form input 
             $this->validation->id_kegiatan = $id_kegiatan;
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Ditambah!</div>');
             redirect('kegiatan');
-
             redirect('kegiatan/index/add_success');
         }
         $this->load->view('templates/new_footer');
@@ -221,6 +221,8 @@ class Kegiatan extends CI_Controller
                 $data['kegiatan'] = (array)$this->kegiatan_model->get_by_id($id_kegiatan)->row();
 
                 $this->validation->id_kegiatan = $id_kegiatan;
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Diubah!</div>');
                 redirect('kegiatan');
                 // set user message
                 $data['message'] = 'Update Success';
@@ -236,6 +238,8 @@ class Kegiatan extends CI_Controller
     {
         // delete
         $this->kegiatan_model->delete($id_kegiatan);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Dihapus!</div>');
         // redirect to list page
         redirect('kegiatan/index/delete_success', 'refresh');
     }

@@ -137,7 +137,8 @@ class Verifikasi extends CI_Controller
 
             // $this->db->where($this->primary_key, $id_verifikasi);
             $this->verifikasi_model->update($id_verifikasi, $verifikasi);
-
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Diubah!</div>');
             redirect('verifikasi');
             // set user message
             $data['message'] = 'Update Success';

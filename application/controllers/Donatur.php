@@ -121,6 +121,8 @@ class Donatur extends CI_Controller
 
             // set form input nama="Kodebuku"
             $this->validation->id_donatur = $id_donatur;
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Ditambah!</div>');
             redirect('donatur');
 
             redirect('donatur/index/add_success');
@@ -147,7 +149,6 @@ class Donatur extends CI_Controller
         $this->load->view('donatur/donaturView', $data);
         $this->load->view('templates/new_footer');
     }
-
 
     function update($id_donatur)
     {
@@ -186,6 +187,8 @@ class Donatur extends CI_Controller
 
             $this->donatur_model->update($id_donatur, $donatur);
             $data['donatur'] = (array)$this->donatur_model->get_by_id($id_donatur)->row();
+            $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Diubah!</div>');
             redirect('donatur');
             // set user message
             $data['message'] = 'Update Success';
@@ -200,6 +203,8 @@ class Donatur extends CI_Controller
     {
         // delete
         $this->donatur_model->delete($id_donatur);
+        $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Data Berhasil Dihapus!</div>');
         // redirect to list page
         redirect('donatur/index/delete_success', 'refresh');
     }
