@@ -45,10 +45,10 @@ class Rapat extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('rapat/index/' . $offset . '/nama_rapat/' . $new_order, 'Nama Rapat'),
-            anchor('rapat/index/' . $offset . '/tgl_rapat/' . $new_order, 'Tanggal'),
-            anchor('rapat/index/' . $offset . '/ket_rapat/' . $new_order, 'Keterangan'),
-            anchor('rapat/index/' . $offset . '/file_rapat/' . $new_order, 'File'),
+            'Nama Rapat',
+            'Tanggal',
+            'Keterangan',
+            'File',
             'Actions'
         );
 
@@ -240,7 +240,6 @@ class Rapat extends CI_Controller
     function rapatdownload($offset = 0, $order_column = 'id_rapat', $order_type = 'asc')
     {
         $data['title'] = 'List Rapat';
-        // $data['user'] = $this->db->get_where('tb_pengurus', ['nama_pengurus' => $this->session->userdata('nama_pengurus')])->row_array();
         $this->load->view('templates/new_header', $data);
         $this->load->view('templates/new_sidebar');
         $this->load->view('templates/new_topbar');
@@ -272,10 +271,10 @@ class Rapat extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('rapat/index/' . $offset . '/nama_rapat/' . $new_order, 'Nama Rapat'),
-            anchor('rapat/index/' . $offset . '/tgl_rapat/' . $new_order, 'Tanggal'),
-            anchor('rapat/index/' . $offset . '/ket_rapat/' . $new_order, 'Keterangan'),
-            anchor('rapat/index/' . $offset . '/file_rapat/' . $new_order, 'File'),
+            'Nama Rapat',
+            'Tanggal',
+            'Keterangan',
+            'File',
             'Actions'
         );
 

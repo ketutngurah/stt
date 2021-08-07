@@ -48,10 +48,10 @@ class Donatur extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('donatur/index/' . $offset . '/nama_donatur/' . $new_order, 'Nama Donatur'),
-            anchor('donatur/index/' . $offset . '/jumlah_donasi/' . $new_order, 'Jumlah Donasi'),
-            anchor('donatur/index/' . $offset . '/tgl_donasi/' . $new_order, 'Tanggal Donasi'),
-            anchor('donatur/index/' . $offset . '/ket_donasi/' . $new_order, 'Keterangan'),
+            'Nama Donatur',
+            'Jumlah Donasi',
+            'Tanggal Donasi',
+            'Keterangan',
             'Actions'
         );
 

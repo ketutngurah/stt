@@ -45,10 +45,10 @@ class Piket extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('piket/index/' . $offset . '/nama_piket/' . $new_order, 'Nama Piket'),
-            anchor('piket/index/' . $offset . '/tgl_piket/' . $new_order, 'Tanggal'),
-            anchor('piket/index/' . $offset . '/ket_piket/' . $new_order, 'Keterangan'),
-            anchor('piket/index/' . $offset . '/file_piket/' . $new_order, 'File'),
+            'Nama Piket',
+            'Tanggal',
+            'Keterangan',
+            'File',
             'Actions'
         );
 
@@ -279,10 +279,10 @@ class Piket extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('piket/index/' . $offset . '/nama_piket/' . $new_order, 'Nama piket'),
-            anchor('piket/index/' . $offset . '/tgl_piket/' . $new_order, 'Tanggal'),
-            anchor('piket/index/' . $offset . '/ket_piket/' . $new_order, 'Keterangan'),
-            anchor('piket/index/' . $offset . '/file_piket/' . $new_order, 'File'),
+            'Nama piket',
+            'Tanggal',
+            'Keterangan',
+            'File',
             'Actions'
         );
 

@@ -45,10 +45,10 @@ class Kegiatan extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('kegiatan/index/' . $offset . '/nama_kegiatan/' . $new_order, 'Nama Kegiatan'),
-            anchor('kegiatan/index/' . $offset . '/tgl_kegiatan/' . $new_order, 'Tanggal'),
-            anchor('kegiatan/index/' . $offset . '/ket_kegiatan/' . $new_order, 'Keterangan'),
-            anchor('kegiatan/index/' . $offset . '/file_kegiatan/' . $new_order, 'File'),
+            'Nama Kegiatan',
+            'Tanggal',
+            'Keterangan',
+            'File',
             'Actions'
         );
 
@@ -279,10 +279,10 @@ class Kegiatan extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('kegiatan/index/' . $offset . '/nama_kegiatan/' . $new_order, 'Nama Kegiatan'),
-            anchor('kegiatan/index/' . $offset . '/tgl_kegiatan/' . $new_order, 'Tanggal'),
-            anchor('kegiatan/index/' . $offset . '/ket_kegiatan/' . $new_order, 'Keterangan'),
-            anchor('kegiatan/index/' . $offset . '/file_kegiatan/' . $new_order, 'File'),
+            'Nama Kegiatan',
+            'Tanggal',
+            'Keterangan',
+            'File',
             'Actions'
         );
 

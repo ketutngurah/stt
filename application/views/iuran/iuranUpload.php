@@ -1,5 +1,6 @@
 <div class="container-fluid">
     <h1 class="ml-2"><?php echo $title; ?></h1>
+    <?= $this->session->flashdata('message'); ?>
     <div class="table">
         <table class="table table-borderless">
             <tr>

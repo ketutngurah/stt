@@ -245,9 +245,9 @@ class Iuran extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('iuran/index/' . $offset . '/nama_iuran/' . $new_order, 'Nama Iuran'),
-            anchor('iuran/index/' . $offset . '/tgl_iuran/' . $new_order, 'Tanggal'),
-            anchor('iuran/index/' . $offset . '/ket_iuran/' . $new_order, 'Keterangan'),
+            'Nama Iuran',
+            'Tanggal',
+            'Keterangan',
             'Actions'
         );
 
@@ -270,23 +270,28 @@ class Iuran extends CI_Controller
 
     function viewUser($id_iuran)
     {
-        $data['title'] = 'Bayar Iuran';
-        $this->load->view('templates/new_header', $data);
-        $this->load->view('templates/new_sidebar');
-        $this->load->view('templates/new_topbar');
+        if (empty($_FILES['file_verifikasi']['name'])) {
+            $this->form_validation->set_rules('file_verifikasi', 'file_verifikasi', 'required', ['required' => 'Masukkan Gambar!']);
+        }
+        if ($this->form_validation->run() == false) {
+            $data['title'] = 'Bayar Iuran';
+            $this->load->view('templates/new_header', $data);
+            $this->load->view('templates/new_sidebar');
+            $this->load->view('templates/new_topbar');
+            // get details
+            $data['iuran'] = $this->iuran_model->get_by_id($id_iuran)->row();
+            $data['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
 
-        // get details
-        $data['iuran'] = $this->iuran_model->get_by_id($id_iuran)->row();
-        $data['user'] = $this->db->get_where('tb_user', ['email' => $this->session->userdata('email')])->row_array();
-
-        // load view
-        $this->load->view('iuran/iuranUpload', $data);
-        $this->load->view('templates/new_footer');
+            // load view
+            $this->load->view('iuran/iuranUpload', $data);
+            $this->load->view('templates/new_footer');
+        } else {
+            $this->uploadfile();
+        }
     }
 
     function uploadfile()
     {
-
         $id_user = $this->input->post('id_user');
         $id_iuran = $this->input->post('id_iuran');
         $file_verifikasi = $_FILES['file_verifikasi']['name'];
@@ -308,16 +313,16 @@ class Iuran extends CI_Controller
 
                 $this->db->insert('tb_verifikasi', $data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
-            Foto Berhasil diupload. Tunggu Verifikasi!</div>');
+                Foto Berhasil diupload. Tunggu Verifikasi!</div>');
                 redirect('iuran/bayar_iuran');
             } else {
                 // echo "image gagal di upload";
                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">' . $this->upload->display_errors() . '</div>');
-                redirect('iuran/bayar_iuran');
+                redirect($_SERVER['HTTP_REFERER']);
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-dsnger" role="alert">Failed upload</div>');
-            redirect('iuran/bayar_iuran');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal mengupload. Isi File!</div>');
+            redirect($_SERVER['HTTP_REFERER']);
         }
     }
 }

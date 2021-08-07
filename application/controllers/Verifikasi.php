@@ -48,9 +48,9 @@ class Verifikasi extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('verifikasi/index/' . $offset . '/id_user/' . $new_order, 'Nama Anggota'),
-            anchor('verifikasi/index/' . $offset . '/id_iuran/' . $new_order, 'Nama Iuran'),
-            anchor('verifikasi/index/' . $offset . '/status/' . $new_order, 'Status'),
+            'Nama Anggota',
+            'Nama Iuran',
+            'Status',
             'Actions'
         );
 
@@ -192,8 +192,8 @@ class Verifikasi extends CI_Controller
         $new_order = ($order_type == 'asc' ? 'desc' : 'asc');
         $this->table->set_heading(
             'No',
-            anchor('verifikasi/index/' . $offset . '/id_iuran/' . $new_order, 'Nama Iuran'),
-            anchor('verifikasi/index/' . $offset . '/status/' . $new_order, 'Status')
+            'Nama Iuran',
+            'Status'
         );
 
         $i = 0 + (int) $offset;

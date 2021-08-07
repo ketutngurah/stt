@@ -1,10 +1,13 @@
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
-        <a href="<?= base_url('dashboard'); ?>" class="simple-text logo-normal">
+        <?php if ($this->session->userdata('role_id') == 1) : ?>
+            <a href="<?= base_url('dashboard'); ?>" class="simple-text logo-normal">
+            <?php elseif ($this->session->userdata('role_id') == 2) : ?>
+            <?php endif ?>
             <div class="text-center">
                 <img class="w-50" src="<?= base_url(); ?>assets/img/stbk-logo.jpg">
             </div>
-        </a>
+            </a>
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
