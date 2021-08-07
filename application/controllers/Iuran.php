@@ -307,6 +307,8 @@ class Iuran extends CI_Controller
                 );
 
                 $this->db->insert('tb_verifikasi', $data);
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">
+            Foto Berhasil diupload. Tunggu Verifikasi!</div>');
                 redirect('iuran/bayar_iuran');
             } else {
                 // echo "image gagal di upload";
