@@ -34,33 +34,19 @@
             </div>
         </div>
     </nav>
-    <!-- Mashead header-->
-    <header class="masthead">
-        <div class="container px-5">
-            <div class="row gx-5 align-items-center">
 
-            </div>
-        </div>
-    </header>
     <!-- Quote/testimonial aside-->
-    <aside class="text-center bg-gradient-primary-to-secondary">
+    <aside class="text-center mt-5" style="background-color: cadetblue;">
         <div class="container px-5">
             <div class="row gx-5 justify-content-center">
                 <div class="col-xl-8">
-                    <div class="h2 fs-1 text-white mb-4">"SELAMAT DATANG DI STT. BHUANA KUSUMA"</div>
+                    <div class="h3 text-white mb-4">"SELAMAT DATANG DI STT. BHUANA KUSUMA"</div>
                     <img src="<?= base_url('assets/'); ?>img/stbk-logo.jpg" alt="..." style="height: 25rem" />
                 </div>
             </div>
         </div>
     </aside>
-    <!-- App features section-->
-    <section id="features">
-        <div class="container px-5">
-            <div class="row gx-5 align-items-center">
 
-            </div>
-        </div>
-    </section>
     <!-- Basic features section-->
     <section class="bg-light">
         <div class="container px-5">
@@ -75,18 +61,45 @@
             </div>
         </div>
     </section>
-    <!-- Call to action section-->
-    <section class="cta">
-        <div class="cta-content">
-            <div class="container px-5">
-                <h2 class="text-white display-1 lh-1 mb-4">
-                    Generasi Muda.
-                    <br />
-                    Genrasi Bangsa.
-                </h2>
+
+    <section class="text-white" style="background-color: cadetblue;">
+        <div class="container px-5">
+            <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
+                <div class="col-sm-8 col-md-6">
+                    <div class="px-5 px-sm-0"><img class="img-fluid img-thumbnail" src="<?= base_url('assets/'); ?>img/stbk-funday.jpg" alt="..." /></div>
+                </div>
+                <div class="col-12 col-lg-5">
+                    <h2 class="display-4 lh-1 mb-4">Total Kas STT:</h2>
+                    <h4 class="text-white display-4 lh-1 mb-4">
+
+                        Rp. 11.000.000
+                    </h4>
+                </div>
             </div>
         </div>
     </section>
+
+    <!-- Call to action section-->
+    <!-- <section class="cta" style="background-color: cadetblue;">
+        <div class="cta-content">
+            <div class="container px-5">
+                <div class="row">
+                    <div class="col">
+                        <div class="px-5 px-sm-0"><img class="img-fluid rounded-circle" src="<?= base_url('assets/'); ?>img/stbk-funday.jpg" alt="..." /></div>
+                    </div>
+                    <div class="col">
+                        <h4 class="text-white display-3 lh-1 mb-4">
+                            Total Kas STT:
+                            <br />
+                            <br />
+                            Rp. 11.000.000
+                        </h4>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section> -->
     </div>
     </div>
     </section>

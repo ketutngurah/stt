@@ -16,7 +16,7 @@
 			</a>
 		</div>
 		<div class="col-lg text-right">
-			<p>Total Donasi</p>
+			<p>Total Kas</p>
 			<h5>Rp. <?= $total_donasi; ?></h5>
 
 		</div>

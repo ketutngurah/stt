@@ -38,6 +38,7 @@ class User extends CI_Controller
             $nama = $this->input->post('nama');
             $tgl_lahir = $this->input->post('tgl_lahir');
             $jk = $this->input->post('jk');
+            $alamat = $this->input->post('alamat');
             $hobi = $this->input->post('hobi');
             $telp = $this->input->post('telp');
             $pekerjaan = $this->input->post('pekerjaan');
@@ -47,6 +48,7 @@ class User extends CI_Controller
             $this->db->set('nama', $nama);
             $this->db->set('tgl_lahir', $tgl_lahir);
             $this->db->set('jk', $jk);
+            $this->db->set('alamat', $alamat);
             $this->db->set('hobi', $hobi);
             $this->db->set('telp', $telp);
             $this->db->set('pekerjaan', $pekerjaan);

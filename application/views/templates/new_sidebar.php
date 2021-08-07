@@ -1,7 +1,7 @@
 <div class="sidebar" data-color="white" data-active-color="danger">
     <div class="logo">
         <a href="<?= base_url('dashboard'); ?>" class="simple-text logo-normal">
-            <div class="mr-4">
+            <div class="text-center">
                 <img class="w-50" src="<?= base_url(); ?>assets/img/stbk-logo.jpg">
             </div>
         </a>

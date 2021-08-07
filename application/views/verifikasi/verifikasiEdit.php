@@ -25,26 +25,28 @@
                 <?php echo form_error('nama_iuran'); ?>
             </div>
 
-            <div class="form-group">
-                <label for="file_verifikasi">File</label>
-                <input type="text" name="file_verifikasi" id="file_verifikasi" disabled="disable" class="form-control" value="<?php echo (set_value('file_verifikasi')) ? set_value('file_verifikasi') : $verifikasi['file_verifikasi']; ?>" />
-                <?php echo form_error('file_verifikasi'); ?>
-            </div>
-            <div class="col-md-12">
-                <a href="" data-toggle="modal" data-target="#exampleModal"><img class="img-thumbnail" src="<?= base_url() ?>uploads/<?= $verifikasi['file_verifikasi'] ?>" /></a>
+            <label for="file_verifikasi">File</label>
+            <div class="row">
+                <div class="col-sm-2" style="width: 200px;">
+                    <a href="" data-toggle="modal" data-target="#exampleModal"><img class="img-thumbnail" src="<?= base_url() ?>uploads/<?= $verifikasi['file_verifikasi'] ?>" /></a>
+                </div>
+                <div class="col">
+                    <div class="form-group">
+                        <input type="text" name="file_verifikasi" id="file_verifikasi" disabled="disable" class="form-control" value="<?php echo (set_value('file_verifikasi')) ? set_value('file_verifikasi') : $verifikasi['file_verifikasi']; ?>" />
+                        <?php echo form_error('file_verifikasi'); ?>
+                    </div>
+                </div>
             </div>
 
-            <div class="d-block ml-2">
-                <label for="jk">Status</label>
-            </div>
+            <label class="mt-3" for="jk">Status</label>
             <div class="form-group row">
-                <div class="col-sm-6 mb-3 mb-sm-0">
+                <div class="col-sm-3 mb-3 mb-sm-0">
                     <div class="custom-control custom-radio">
                         <input id="belum lunas" name="status" type="radio" class="custom-control-input" checked="" value="belum lunas" value="0">
                         <label class="custom-control-label" for="belum lunas">Belum Lunas</label>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-2">
                     <div class="custom-control custom-radio">
                         <input id="lunas" name="status" type="radio" class="custom-control-input" value="1">
                         <label class="custom-control-label" for="lunas">Lunas</label>
@@ -55,7 +57,7 @@
                 ?>
             </div>
 
-            <div class="form-group">
+            <div class="form-group mt-5">
                 <input type="submit" class="btn btn-info" value="Save" />
             </div>
     </form>
