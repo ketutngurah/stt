@@ -66,7 +66,7 @@
         <div class="container px-5">
             <div class="row gx-5 align-items-center justify-content-center justify-content-lg-between">
                 <div class="col-sm-8 col-md-6">
-                    <div class="px-5 px-sm-0"><img class="img-fluid img-thumbnail" src="<?= base_url('assets/'); ?>img/stbk-funday.jpg" alt="..." /></div>
+                    <div class="px-5 px-sm-0"><img class="img-fluid img-thumbnail" src="<?= base_url('assets/'); ?>img/donatur.jpg" alt="..." /></div>
                 </div>
                 <div class="col-12 col-lg-5">
                     <h2 class="display-4 lh-1 mb-4">Total Kas STT:</h2>
